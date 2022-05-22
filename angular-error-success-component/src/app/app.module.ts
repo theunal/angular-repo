@@ -14,7 +14,7 @@ import { SuccessComponent } from './components/success/success.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
