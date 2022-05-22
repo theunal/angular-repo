@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="table table-striped w-100 mx-auto">
+
+        <thead>
+            <tr>
+                <th style="text-align: center;">Ürün adı</th>
+                <th style="text-align: center;">tarih</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td style="text-align: center;">{{product.name}}</td>
+                <td style="text-align: center;">{{product.date | date:"dd-mmm-yyyy hh:mm:ss"}}</td>
+                <td>
+                    <button class="btn btn-danger" (click)="productDelete(product)">Sil</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </div>
+</div>

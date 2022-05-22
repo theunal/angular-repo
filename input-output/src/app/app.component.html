@@ -1,0 +1,7 @@
+
+
+
+<input class="form-control w-25 mx-auto mt-5 mb-1" [(ngModel)] = "product">
+<button class="btn btn-success mb-5" (click)="productAdd()" style="margin-left: 720px;">kaydet</button>
+
+<app-list [products] = "products" (myEvent)="productDelete($event)"></app-list>

@@ -3,14 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ErrorComponent } from './components/error/error.component';
-import { SuccessComponent } from './components/success/success.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavComponent } from './components/nav/nav.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorComponent,
-    SuccessComponent
+    HomeComponent,
+    NavComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
