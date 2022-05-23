@@ -1,7 +1,7 @@
 import { ProductModel } from "./product"
 
 
-    export interface BasketModel {
+    export class BasketModel {
         product : ProductModel
         quantity : number
     }

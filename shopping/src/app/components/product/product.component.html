@@ -1,22 +1,26 @@
-<div class="row mx-auto">
+<div class="row mx-auto mb-5">
 
 
-    <div class="card mt-3" style="width: 18rem; margin-right: 20px;">
-        <img src="https://images.ctfassets.net/hrltx12pl8hq/38IOQ8uJCwgRI7WxHk52k8/e49205e80d0c2631377ada4b00ed730a/Artboard_7.jpg?fit=fill&w=480&h=270"
-            class="card-img-top" alt="...">
+    <div *ngFor="let product of products" class="card mt-3" style="width: 16rem; margin-right: 20px;">
+        <img src={{product.image}} height="150">
         <div class="card-body">
-            <h5 class="card-title" style="text-align: center;">Card title</h5>
-            <p class="card-text" style="text-align: justify;">Some quick example text to build on the card title and
-                make up the bulk of the
-                card's content.</p>
-
-            <input type="number" class="form-control mb-2 mx-auto w-50">
-            <button class="btn btn-success mx-5">
-                Sepete Ekle <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-            </button>
+            <h5 class="card-title" style="text-align: center;">
+                {{product.name}} - <p class="badge bg-danger">{{product.price |currency: '':'':'1.2'}} ₺</p>
+            </h5>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="number" min="1" value="1" class="form-control" id="q-{{product.name}}" required>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-success" (click)="addBasket(product)">
+                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-
 
 
 

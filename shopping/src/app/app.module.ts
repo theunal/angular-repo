@@ -24,7 +24,12 @@ import { HomeComponent } from './components/home/home.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      progressBar: true,
+      progressAnimation: 'increasing',
+      timeOut: 3000
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
