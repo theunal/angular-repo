@@ -1,0 +1,7 @@
+<p class="display-4 text-center">Ürün Listesi</p>
+<div class="col-md-4 mx-auto">
+    <ul class="list-group">
+        <li class="list-group-item" >default</li>
+        <li *ngFor="let email of emails" class="list-group-item" [innerText]="email.name">{{email.name}}</li>
+    </ul>
+</div>

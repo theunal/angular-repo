@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { DoneModel } from './models/doneModel';
-import { UnDoneModel } from './models/unDoneModel';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +6,5 @@ import { UnDoneModel } from './models/unDoneModel';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'component-databinding';
-
+  title = 'directives';
 }

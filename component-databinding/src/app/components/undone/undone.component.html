@@ -1,0 +1,8 @@
+<h3 class="text-primary">yapılacaklar listesi</h3>
+<ul class="list-group">
+  <li class="list-group-item w-50" *ngFor="let undone of unDoneModels">
+    {{undone.title}}
+    <button class="btn btn-success float-right" style="margin-left: 100px;" (click)="complete(undone)">tamamla</button>
+    <button class="btn btn-danger float-right" style="margin-left: 5px;" (click)="delete(undone)">sil</button>
+  </li>
+</ul>
