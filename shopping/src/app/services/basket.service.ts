@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BasketModel } from '../models/basket';
+import { OrderService } from './order.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class BasketService {
   basketList: BasketModel[] = []
   total: number = 0
 
-  constructor(private toastrService : ToastrService) { }
+  constructor(private toastrService : ToastrService, private orderService : OrderService) { }
 
   
   addBasket(model : BasketModel) {
@@ -51,9 +52,12 @@ export class BasketService {
 
   payment(total: number) {
     if (total == this.total) {
-      this.basketList.splice(0, this.basketList.length)
+      this.orderService.addOrder(this.basketList)
+     // this.basketList.splice(0, this.basketList.length)
       document.getElementById('paymentCloseButton').click();
       this.toastrService.success('Ödeme Başarılı')
+
+     
     }
   }
 }

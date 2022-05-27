@@ -11,6 +11,7 @@ import { BasketComponent } from './components/basket/basket.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
     ProductComponent,
     BasketComponent,
     PaymentComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

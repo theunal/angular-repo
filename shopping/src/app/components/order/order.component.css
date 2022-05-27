@@ -1,0 +1,11 @@
+
+
+
+thead tr th,
+tbody tr td {
+    text-align: center;
+}
+
+tbody tr td {
+    vertical-align: middle;
+}

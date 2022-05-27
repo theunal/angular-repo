@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BasketModel } from 'src/app/models/basket';
 import { BasketService } from 'src/app/services/basket.service';
 

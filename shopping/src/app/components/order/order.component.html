@@ -1,0 +1,26 @@
+<div class="container">
+    <table class="table table-striped table-bordered mt-5 mx-auto w-75">
+        <thead>
+            <tr>
+                <th>Sipariş Numarası</th>
+                <th>Ürünler</th>
+                <th>Sipariş Tarihi</th>
+                <th>Toplam Ücret</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order.orderNumber}}</td>
+                <td>
+                    <li class="list-group-item" *ngFor="let basket of order.baskets">
+                        {{basket.product.name}}
+                        <label class="badge bg-info" style="float: right;">{{basket.quantity}}</label>
+                    </li>
+                </td>
+                <td>{{order.date}}</td>
+                <td>{{total | currency: '' : '' : '1.2'}} ₺</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
