@@ -1,0 +1,22 @@
+
+<div class="container mt-5">
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <button class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/">Home</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" routerLinkActive="active"  routerLink="/about"
+      [queryParams]="{id:1, name:'yusuf'}">About</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" routerLinkActive="active"  routerLink="/contact">Contact</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" routerLinkActive="active"  routerLink="/user">User</button>
+    </li>
+  </ul>
+  <router-outlet></router-outlet> 
+</div>
+
+
+
