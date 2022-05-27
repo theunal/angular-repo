@@ -1,34 +1,28 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { BasketModel } from './../../models/basket';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent implements OnInit, AfterContentChecked {
 
 
 
-  @Input()
-  total : number = 0
+  total: number = 0
 
-  @Output()
-  myEvent2 : EventEmitter<any> = new EventEmitter()
-
-  constructor() { }
+  constructor(private basketService: BasketService) { }
 
   ngOnInit(): void {
   }
 
-  totalPrice() {
-    return this.total
+  ngAfterContentChecked(): void {
+    this.total = this.basketService.total // ng on init sadece bir kez çalıştıgı için totali güncelliyemiyor
   }
 
   payment() {
-    this.myEvent2.emit({
-      total : this.total
-    })
+    this.basketService.payment(this.total)
   }
 
 

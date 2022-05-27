@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BasketModel } from 'src/app/models/basket';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  baskets : BasketModel[] = []
+
+  constructor(private basketService : BasketService) { }
 
   ngOnInit(): void {
+    this.baskets = this.basketService.basketList
   }
 
 }

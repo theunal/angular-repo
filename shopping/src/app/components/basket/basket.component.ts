@@ -1,64 +1,44 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { BasketModel } from 'src/app/models/basket';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.css']
 })
-export class BasketComponent implements OnInit {
+export class BasketComponent implements OnInit{
 
 
-  @Input()
+
   basketList: BasketModel[] = []
-
-  @Input()
   total: number = 0
 
-
-
-  constructor(private toastrService: ToastrService) { }
+  constructor(private basketService: BasketService) { }
 
   ngOnInit(): void {
+    this.basketList = this.basketService.basketList
+    this.total = this.basketService.total
   }
 
   totalPrice() {
-    this.total = 0
-    this.basketList.forEach(element => {
-      this.total += element.product.price * element.quantity
-    })
+    this.total = this.basketService.totalPrice()
     return this.total
   }
 
   delete(basket: BasketModel) {
-    this.basketList.splice(this.basketList.indexOf(basket), 1)
-    this.toastrService.info(basket.product.name + ' sepetten silindi')
+    this.basketService.delete(basket)
   }
 
   increase(basket: BasketModel) {
-    basket.quantity++
-    this.toastrService.show(basket.product.name + ' miktarı arttırıldı')
+    this.basketService.increase(basket)
   }
 
   reduce(basket: BasketModel) {
-    if (basket.quantity > 1) {
-      basket.quantity--
-      this.toastrService.warning(basket.product.name + ' miktarı azaltıldı')
-    } else {
-      this.basketList.splice(this.basketList.indexOf(basket), 1)
-      this.toastrService.info(basket.product.name + ' sepetten silindi')
-    }
+    this.basketService.reduce(basket)
   }
 
 
-  payment(event : any) {
-    if (event.total == this.total) {
-      this.basketList.splice(0, this.basketList.length)
-      document.getElementById('paymentCloseButton').click();
-      this.toastrService.success('Ödeme Başarılı')
-    }
-  }
 
 
 

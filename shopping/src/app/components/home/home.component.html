@@ -1,14 +1,13 @@
 
-<app-nav></app-nav>
 
 
 <div class="container mt-4" >
     <div class="row">
         <div class="col-md-8">
-            <app-product (myEvent)="getBasket($event)"></app-product>
+            <app-product></app-product>
         </div>
         <div class="col-md-4">
-            <app-basket [basketList] = "homeBaskets" ></app-basket>
+            <app-basket></app-basket>
         </div>
     </div>
 </div>

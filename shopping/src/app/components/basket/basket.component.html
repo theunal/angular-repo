@@ -12,7 +12,7 @@
 
     <tbody>
         <tr *ngFor="let basket of basketList">
-            <td scope="row">{{basket.product.name}}</td>
+            <td scope="row" style="color: red;">{{basket.product.name}}</td>
             <td>{{basket.quantity}}</td>
             <td>{{   (basket.quantity * basket.product.price) | currency: '' : '' : '1.2'  }} ₺</td> 
             <td>
@@ -40,10 +40,13 @@
 
 </table>
 
-<button class="btn btn-primary mt-1" data-bs-toggle = "modal" data-bs-target = "#paymentModal">
+<button *ngIf="total != 0" class="btn btn-primary mt-1" data-bs-toggle = "modal" data-bs-target = "#paymentModal">
     <i class="fa fa-credit-card" style="margin-right: 5px; margin-bottom: 5px;" aria-hidden="true"></i> Ödemeye Geç
 </button>
 
-<app-payment [total] = "total" (myEvent2)="payment($event)"></app-payment>
+<app-payment ></app-payment>
+
+
+
 
 

@@ -8,19 +8,13 @@ import { BasketModel } from 'src/app/models/basket';
 })
 export class HomeComponent implements OnInit {
 
-  homeBaskets : BasketModel[] = []
-
-
+  
 
   constructor() { }
 
   ngOnInit(): void {  
   }
 
-
-  getBasket(event : any) {
-    this.homeBaskets = event.data
-  }
 
 
 
