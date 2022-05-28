@@ -5,13 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavComponent } from './components/nav/nav.component';
+import { NavComponent } from './components/layouts/nav/nav.component';
 import { ProductComponent } from './components/product/product.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { OrderComponent } from './components/order/order.component';
+import { LayoutsComponent } from './components/layouts/layouts.component';
+import { FooterComponent } from './components/layouts/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { OrderComponent } from './components/order/order.component';
     BasketComponent,
     PaymentComponent,
     ProductAddComponent,
-    OrderComponent
+    OrderComponent,
+    LayoutsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

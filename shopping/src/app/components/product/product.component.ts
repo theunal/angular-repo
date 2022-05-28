@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
 import { BasketModel } from 'src/app/models/basket';
 import { BasketService } from 'src/app/services/basket.service';
 import { ProductService } from 'src/app/services/product.service';
