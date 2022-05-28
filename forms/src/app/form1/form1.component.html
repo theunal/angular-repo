@@ -1,0 +1,45 @@
+<!-- reactive form -->
+<div class="container mt-5">
+
+    <form [formGroup]="addForm" (ngSubmit)="submit()">
+      <div class='form-group mb-3 w-50 mx-auto'>
+        <input type='email'  class='form-control' formControlName="email" />
+        <p *ngIf="addForm.get('email').touched && addForm.get('email').invalid" 
+        class="mt-1 text-danger">Lorem, ipsum dolor.</p>
+
+      </div>
+  
+      <div class='form-group mb-3 w-50 mx-auto'>
+        <input type='password'  class='form-control' formControlName="password"/>
+        <p *ngIf="addForm.get('password').touched && addForm.get('password').invalid" 
+        class="mt-1 text-danger">Lorem, ipsum dolor.</p>
+      </div>
+  
+      <div class='form-group mb-3 w-50 mx-auto'>
+        <input type='checkbox' class='form-check-input' formControlName="checkbox" checkbox/>
+      </div>
+  
+      <div class="row text-center mt-4">
+        <div class="col-md-12">
+          <button type="submit" class='btn btn-success' >submit</button>
+        </div>
+      </div>
+    </form>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">email</th>
+          <th scope="col">password</th>
+          <th scope="col">check</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{user.email}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.checkbox}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
