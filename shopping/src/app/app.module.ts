@@ -14,6 +14,8 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
 import { OrderComponent } from './components/order/order.component';
 import { LayoutsComponent } from './components/layouts/layouts.component';
 import { FooterComponent } from './components/layouts/footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +28,14 @@ import { FooterComponent } from './components/layouts/footer/footer.component';
     ProductAddComponent,
     OrderComponent,
     LayoutsComponent,
-    FooterComponent
+    FooterComponent,
+    ProductUpdateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

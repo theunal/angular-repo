@@ -14,8 +14,11 @@
                     <input type="number" min="1" value="1" class="form-control" id="q-{{product.name}}" required>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn btn-success" (click)="addBasket(product)">
+                    <button *ngIf="!isAuth" class="btn btn-success" (click)="addBasket(product)" title="Sepete Ekle">
                         <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                    </button>
+                    <button *ngIf="isAuth" class="btn btn-warning" title="Ürünü Güncelle" routerLink="/update/{{product.id}}">
+                        <i class="fa-solid fa-pen-fancy"></i>
                     </button>
                 </div>
             </div>
