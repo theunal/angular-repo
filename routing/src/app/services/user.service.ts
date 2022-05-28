@@ -20,10 +20,18 @@ export class UserService {
     return this.users.find(u => u.id === id)
   }
 
+  
+  getUserByName(name: string): boolean {
+    if (this.users.find(u => u.name === name)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
 
   update(id: number, name: string) {
     this.users.find(u => u.id === id).name = name
     this.router.navigate(['/user'])
-
   }
 }

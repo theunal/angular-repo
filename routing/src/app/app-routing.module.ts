@@ -6,6 +6,7 @@ import { Err404Component } from './components/err404/err404.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { UserComponent } from './components/user/user.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,8 +14,10 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'contact/:id', component: ContactComponent },
   {
-    path: 'user', component: UserComponent, children: [
-      { path: ':id', component: UserUpdateComponent }
+    // bu şekilde canActivate yazılırsa user'a ve onun tüm chillarına uygulanır
+    // canActivateChild yazılırsa sadece user'ın childlarına uygulanır kendisine uygulanmaz
+    path: 'user', component: UserComponent, canActivateChild: [AuthGuard], children: [
+      { path: ':id', component: UserUpdateComponent, canDeactivate: [AuthGuard] }
     ]
   },
   { path: '**', redirectTo: '' } // eğer hiçbir url'ye ulaşılmazsa home'a gider
