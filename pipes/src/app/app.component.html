@@ -1,0 +1,14 @@
+
+
+
+<div class="container">
+
+  <input class="form-control w-25 mt-4" [(ngModel)] = 'filterText' placeholder="arama ifadesi giriniz" >
+  
+
+    <ul class="list-group mt-4">
+      <li class="list-group-item w-25" *ngFor="let product of products | filterPipe : filterText   ">{{product.name}} - {{product.price}}</li>
+   </ul>
+  
+ 
+</div>
