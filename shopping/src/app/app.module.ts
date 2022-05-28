@@ -16,6 +16,7 @@ import { LayoutsComponent } from './components/layouts/layouts.component';
 import { FooterComponent } from './components/layouts/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ProductUpdateComponent } from './components/product-update/product-upda
     OrderComponent,
     LayoutsComponent,
     FooterComponent,
-    ProductUpdateComponent
+    ProductUpdateComponent,
+    FilterPipePipe
   ],
   imports: [
     BrowserModule,

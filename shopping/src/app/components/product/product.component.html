@@ -1,7 +1,16 @@
 <div class="row mx-auto mb-5">
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mx-auto">
+                <input class="form-control text-center" type="text" placeholder="Ürün Arayın" [(ngModel)] = filterText>
+            </div>
+        </div>
+    </div>
 
-    <div *ngFor="let product of products" class="card mt-3" style="width: 16rem; margin-right: 20px;">
+
+    <div *ngFor="let product of products | filterPipe : filterText" class="card mt-3" style="width: 16rem; margin-right: 20px;">
+
         <img src={{product.image}} height="150">
         <div class="card-body">
             <h5 class="card-title" style="text-align: center;">
@@ -17,7 +26,8 @@
                     <button *ngIf="!isAuth" class="btn btn-success" (click)="addBasket(product)" title="Sepete Ekle">
                         <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                     </button>
-                    <button *ngIf="isAuth" class="btn btn-warning" title="Ürünü Güncelle" routerLink="/update/{{product.id}}">
+                    <button *ngIf="isAuth" class="btn btn-warning" title="Ürünü Güncelle"
+                        routerLink="/update/{{product.id}}">
                         <i class="fa-solid fa-pen-fancy"></i>
                     </button>
                 </div>

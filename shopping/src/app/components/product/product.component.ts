@@ -14,13 +14,16 @@ export class ProductComponent implements OnInit, AfterContentChecked {
 
   isAuth : boolean = false
   products: ProductModel[] = []
+  filterText : string = ''
 
 
   constructor(private productService : ProductService, private basketService : BasketService,
      private authService : AuthService) { }
 
   ngOnInit(): void {
-    this.products = this.productService.products
+    this.productService.getProducts().subscribe(res => {
+      this.products = res
+    })
   }
 
   ngAfterContentChecked(): void {
@@ -31,8 +34,7 @@ export class ProductComponent implements OnInit, AfterContentChecked {
     let basket = new BasketModel()
     basket.product = product
     basket.quantity = parseInt((<HTMLInputElement>document.getElementById('q-'+ product.name)).value);
-   
-
+  
     (<HTMLInputElement>document.getElementById('q-'+ product.name)).value = "1"
     
     this.basketService.addBasket(basket)

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { BasketModel } from 'src/app/models/basket';
 import { AuthService } from 'src/app/services/auth.service';
 import { BasketService } from 'src/app/services/basket.service';
 import { ToastrService } from 'ngx-toastr';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,14 +12,16 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavComponent implements OnInit {
 
+
   baskets : BasketModel[] = []
 
-  constructor(private basketService : BasketService, private authService : AuthService, private toastrService : ToastrService) { }
+
+  constructor(private basketService : BasketService, private authService : AuthService,
+     private toastrService : ToastrService, private productService : ProductService) { }
 
   ngOnInit(): void {
     this.baskets = this.basketService.basketList
   }
-
 
   login() {
     this.authService.login()
@@ -33,4 +36,11 @@ export class NavComponent implements OnInit {
   getAuth() {
     return this.authService.isAuthenticated()
   }
+
+
+
+
+
+
+
 }

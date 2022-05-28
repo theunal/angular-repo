@@ -19,6 +19,8 @@ export class ProductService {
     { id:7, name: 'Yerli Muz', stok:100, price: 35, image:'https://www.tazemasa.com/Uploads/UrunResimleri/buyuk/d2c3eff1-702c-41f0-967d-04b3961e3ec4.jpg'},
   ]
 
+
+
   constructor(private toastrService : ToastrService, private router : Router) { }
 
 
@@ -47,5 +49,11 @@ export class ProductService {
     this.router.navigate(['/'])
     this.toastrService.success('Ürün Güncellendi', product.name)
   }
+
+  getProducts() : Observable<ProductModel[]> {
+    return of(this.products)
+  }
+
+
 
 }
