@@ -10,15 +10,36 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/">Ana Sayfa</a>
+          <a class="nav-link active" aria-current="page" routerLink="/">
+            <i class="fa-solid fa-house-user"></i>
+            Ana Sayfa</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/add">Yeni Ürün</a>
+          <a class="nav-link" routerLink="/add">
+            <i class="fa-regular fa-square-plus"></i>
+            Yeni Ürün
+          </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/orders">
+            <i class="fa-solid fa-list"></i>
+            Siparişler
+          </a>
+        </li>
+
       </ul>
 
-      <input class="form-control w-50 mx-auto" type="search" placeholder="Ürün Arayın">
+
+
+      <div class="col-md-5">
+        <div class="mx-auto">
+          <input class="form-control " type="search" placeholder="Ürün Arayın">
+        </div>
+      </div>
+
+
 
       <div class="dropdown" style="margin-left: 100px;">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -34,10 +55,31 @@
               <label class="badge bg-info" style="float: right;">{{basket.quantity}}</label>
             </a>
           </li>
-          <li><hr class="dropdown-divider"></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
           <li><a class="dropdown-item" routerLink="/orders">Siparişlerim</a></li>
         </ul>
       </div>
+
+      <div style="float: right;">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <button *ngIf="!getAuth()" class="btn btn-secondary" (click)="login()">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              login</button>
+          </li>
+
+          <li class="nav-item">
+            <button *ngIf="getAuth()" class="btn btn-secondary" (click)="logout()">
+              <i class="fa-solid fa-power-off"></i>
+              logout
+            </button>
+          </li>
+        </ul>
+      </div>
+
+
 
     </div>
   </div>

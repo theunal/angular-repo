@@ -17,13 +17,13 @@
             <td>{{   (basket.quantity * basket.product.price) | currency: '' : '' : '1.2'  }} ₺</td> 
             <td>
                 <button class="btn btn-sm btn-danger" (click)="delete(basket)">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i class="fa-solid fa-trash-can"></i>
                 </button>
                 <button class="btn btn-sm btn-primary" (click)="increase(basket)">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <i class="fa-solid fa-plus"></i>
                 </button>
                 <button class="btn btn-sm btn-primary" (click)="reduce(basket)">
-                    <i class="fa fa-minus" aria-hidden="true"></i>
+                    <i class="fa-solid fa-minus"></i>
                 </button>
             </td>
         </tr>
