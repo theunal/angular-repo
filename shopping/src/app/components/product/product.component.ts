@@ -28,10 +28,10 @@ export class ProductComponent implements OnInit, AfterContentChecked {
       this.spinner.hide()
     }, err => {
       if (err.status == '404') {
-        this.spinner.show()
+        this.spinner.hide()
         this.toastrService.error(err.statusText)
       } else {
-        this.spinner.show()
+        this.spinner.hide()
         console.log(err)
       }
     })

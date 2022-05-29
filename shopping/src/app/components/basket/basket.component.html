@@ -1,6 +1,9 @@
-<h2>Sepetiniz</h2>
 
-<table class="table table-striped">
+
+
+<h2 *ngIf="getAuth()">Sepetiniz</h2>
+
+<table *ngIf="getAuth()" class="table table-striped">
     <thead>
         <tr>
             <th scope="col">Ürün Adı</th>
@@ -40,7 +43,8 @@
 
 </table>
 
-<button *ngIf="total != 0" class="btn btn-primary mt-1" data-bs-toggle = "modal" data-bs-target = "#paymentModal">
+
+<button *ngIf="total != 0 || getAuth()" class="btn btn-primary mt-1" data-bs-toggle = "modal" data-bs-target = "#paymentModal">
     <i class="fa fa-credit-card" style="margin-right: 5px; margin-bottom: 5px;" aria-hidden="true"></i> Ödemeye Geç
 </button>
 

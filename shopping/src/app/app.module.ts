@@ -20,6 +20,8 @@ import { ProductUpdateComponent } from './components/product-update/product-upda
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { from } from 'rxjs';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoginComponent } from './components/login/login.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FooterComponent,
     ProductUpdateComponent,
     FilterPipePipe,
+    LoginComponent,
+    SpinnerComponent,
     
   ],
   imports: [

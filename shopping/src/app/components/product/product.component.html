@@ -8,18 +8,9 @@
         </div>
     </div>
 
+    <app-spinner></app-spinner>
 
-    <!-- <div *ngIf="!load" class="text-center">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div> -->
-
-    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="line-scale" [fullScreen]="true">
-        <p style="color: white"> Loading... </p>
-    </ngx-spinner>
-
-    <div class="row">
+    <div *ngIf="isAuth"  class="row">
         <div *ngFor="let product of products | filterPipe : filterText" class="card mt-3"
             style="width: 16rem; margin-right: 20px;">
 
@@ -47,10 +38,37 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
+    <div *ngIf="!isAuth" class="row">
+        <div *ngFor="let product of products | filterPipe : filterText" class="card mt-3"
+            style="width: 15rem; margin-left: 12px;">
+
+            <img src={{product.image}} height="150">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align: center;">
+                    {{product.name}} - <p class="badge bg-danger">{{product.price |currency: '':'':'1.2'}} ₺</p>
+                </h5>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="number" min="1" value="1" class="form-control" id="q-{{product.name}}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <button *ngIf="!isAuth" class="btn btn-success" (click)="addBasket(product)"
+                            title="Sepete Ekle">
+                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                        </button>
+                        <button *ngIf="isAuth" class="btn btn-warning" title="Ürünü Güncelle"
+                            routerLink="/update/{{product.id}}">
+                            <i class="fa-solid fa-pen-fancy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

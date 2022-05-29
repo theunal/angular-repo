@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketModel } from 'src/app/models/basket';
+import { AuthService } from 'src/app/services/auth.service';
 import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class BasketComponent implements OnInit{
   basketList: BasketModel[] = []
   total: number = 0
 
-  constructor(private basketService: BasketService) { }
+  constructor(private basketService: BasketService, private authService : AuthService) { }
 
   ngOnInit(): void {
     this.basketList = this.basketService.basketList
@@ -38,6 +39,9 @@ export class BasketComponent implements OnInit{
     this.basketService.reduce(basket)
   }
 
+  getAuth() {
+    return this.authService.isAuthenticated()
+  }
 
 
 
