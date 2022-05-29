@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import { FooterComponent } from './components/layouts/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { from } from 'rxjs';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
     LayoutsComponent,
     FooterComponent,
     ProductUpdateComponent,
-    FilterPipePipe
+    FilterPipePipe,
+    
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,8 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       progressBar: true,

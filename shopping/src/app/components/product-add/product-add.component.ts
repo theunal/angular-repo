@@ -28,12 +28,12 @@ export class ProductAddComponent implements OnInit {
   }
 
   productAdd() {
-    if (this.addForm.valid) {
-      this.productService.productAdd(this.addForm.value)
-      this.addForm.reset()
-    } else {
-      this.toastrService.error('Lütfen tüm alanları doldurunuz!')
-    }
+    // if (this.addForm.valid) {
+    //   this.productService.productAdd(this.addForm.value)
+    //   this.addForm.reset()
+    // } else {
+    //   this.toastrService.error('Lütfen tüm alanları doldurunuz!')
+    // }
    
   }
 

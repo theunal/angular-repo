@@ -40,27 +40,27 @@ export class ProductUpdateComponent implements OnInit {
 
 
   productUpdate() {
-    if (this.updateForm.valid) {
-      let product = new ProductModel
-      product.id = this.activatedRoute.snapshot.params['id']
-      product.name = this.updateForm.controls['name'].value
-      product.image = this.updateForm.controls['image'].value
-      product.stok = this.updateForm.controls['stok'].value
-      product.price = this.updateForm.controls['price'].value
+    // if (this.updateForm.valid) {
+    //   let product = new ProductModel
+    //   product.id = this.activatedRoute.snapshot.params['id']
+    //   product.name = this.updateForm.controls['name'].value
+    //   product.image = this.updateForm.controls['image'].value
+    //   product.stok = this.updateForm.controls['stok'].value
+    //   product.price = this.updateForm.controls['price'].value
 
-      this.productService.productUpdate(product)
-    } else {
-      this.toastrService.info('Lütfen formu doldurunuz!')
-    }
+    //   this.productService.productUpdate(product)
+    // } else {
+    //   this.toastrService.info('Lütfen formu doldurunuz!')
+    // }
   }
 
   getProduct() {
-    return this.productService.getProduct(this.activatedRoute.snapshot.params['id']).subscribe(res => {
-      this.product = res
-      this.updateForm.controls['name'].setValue(res.name)
-      this.updateForm.controls['image'].setValue(res.image)
-      this.updateForm.controls['stok'].setValue(res.stok)
-      this.updateForm.controls['price'].setValue(res.price)
-    })
+    // return this.productService.getProduct(this.activatedRoute.snapshot.params['id']).subscribe(res => {
+    //   this.product = res
+    //   this.updateForm.controls['name'].setValue(res.name)
+    //   this.updateForm.controls['image'].setValue(res.image)
+    //   this.updateForm.controls['stok'].setValue(res.stok)
+    //   this.updateForm.controls['price'].setValue(res.price)
+    // })
   }
 }
