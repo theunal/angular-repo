@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { OrderModel } from 'src/app/models/order';
 import { BasketService } from 'src/app/services/basket.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -20,6 +21,7 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.orders = this.orderService.orders
     this.total = this.basketService.total
+    
     console.log(this.orders)
   }
 

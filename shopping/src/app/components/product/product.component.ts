@@ -51,4 +51,8 @@ export class ProductComponent implements OnInit, AfterContentChecked {
     this.basketService.addBasket(basket)
   }
 
+
+  sepeteEkleButon() {
+    return "btn btn-success"
+  }
 }

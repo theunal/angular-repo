@@ -1,7 +1,6 @@
 
 
-    export class ResponseModel<T> {
-        data : T
-        success : boolean
+    export class ResponseModel {
+        success : string
         message : string
     }

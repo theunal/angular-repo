@@ -1,7 +1,7 @@
 
 
 
-<div *ngIf="isAuth" class="container mt-4" >
+<div *ngIf="getAuth()" class="container mt-4" >
     <div class="row">
         <div class="col-md-8">
             <app-product></app-product>
@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div *ngIf="!isAuth" class="container mt-4">
+<div *ngIf="getAuth() == false" class="container mt-4">
     <div class="row" >
         <div class="col-md-12" >
             <app-product ></app-product>

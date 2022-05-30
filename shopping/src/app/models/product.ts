@@ -3,9 +3,10 @@
     export class ProductModel {
         id: number
         name : string
-        image : string
-        stok : number
+        imageUrl : string
+        inventoryQuantity : number
         price : number
+        codeGuid : string
       
     }
 

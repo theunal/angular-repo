@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     HttpClientModule,
+    SweetAlert2Module.forRoot(), // npm i @sweetalert2/ngx-sweetalert2 --save
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       progressBar: true,

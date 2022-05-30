@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ResponseModel } from '../models/responseModel';
 import { TokenModel } from '../models/token';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,18 @@ export class AuthService {
   constructor(private httpClient : HttpClient, private router : Router) { }
 
   isAuthenticated() {
+    if (localStorage.getItem('token')) {
+      this.isAuth = true
+    } else {
+      this.isAuth = false
+    }
     return this.isAuth
   }
 
-  login(login : LoginModel) : Observable<ResponseModel<TokenModel>>  {
+  login(login : LoginModel) : Observable<SingleResponseModel<TokenModel>>  {
     let url = 'https://webapi.angulareducation.com/api/users/login'
     this.isAuth = true
-    return this.httpClient.post<ResponseModel<TokenModel>>(url,login)
+    return this.httpClient.post<SingleResponseModel<TokenModel>>(url,login)
   }
 
   logout() {

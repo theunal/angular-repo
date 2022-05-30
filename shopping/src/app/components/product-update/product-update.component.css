@@ -3,3 +3,8 @@
 .form-label {
     font-size: 13px;
 }
+
+.btn {
+    margin-right: 5px;
+    margin-top: 5px;
+}

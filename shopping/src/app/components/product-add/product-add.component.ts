@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { ProductModel } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -11,8 +13,10 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductAddComponent implements OnInit {
 
   addForm : FormGroup
+  imageUrl : string = ''
 
-  constructor(private productService : ProductService, private toastrService : ToastrService) { }
+  constructor(private productService : ProductService, private toastrService : ToastrService, 
+    private spinner : NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.createAddForm()
@@ -21,20 +25,34 @@ export class ProductAddComponent implements OnInit {
   createAddForm() {
     this.addForm = new FormGroup({
       name : new FormControl('', [Validators.required]),
-      image : new FormControl('', [Validators.required]),
-      stok : new FormControl('', [Validators.required]),
-      price : new FormControl('', [Validators.required])
+      imageUrl : new FormControl('', [Validators.required]),
+      inventoryQuantity : new FormControl('', [Validators.required]),
+      price : new FormControl('', [Validators.required]),
     })
   }
 
   productAdd() {
-    // if (this.addForm.valid) {
-    //   this.productService.productAdd(this.addForm.value)
-    //   this.addForm.reset()
-    // } else {
-    //   this.toastrService.error('Lütfen tüm alanları doldurunuz!')
-    // }
-   
+    this.spinner.show()
+    if (this.addForm.valid) {
+      this.spinner.hide()
+      let product = new ProductModel()
+      this.productService.getProducts().subscribe(res => {
+        product.id = res.data.length +1
+      })
+      product.name = this.addForm.value.name
+      product.imageUrl = this.addForm.value.imageUrl
+      product.inventoryQuantity = this.addForm.value.inventoryQuantity
+      product.price = this.addForm.value.price
+
+      this.productService.productAdd(product).subscribe(res => {
+        this.toastrService.success('Product Added', 'Success')
+      }, err => {
+        this.toastrService.warning(err.error.message)
+      })
+    } else {
+      this.spinner.hide()
+      this.toastrService.error('Lütfen tüm alanları doldurunuz!')
+    }
   }
 
 }
