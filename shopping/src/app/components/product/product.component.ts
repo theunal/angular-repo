@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BasketModel } from 'src/app/models/basket';
 import { AuthService } from 'src/app/services/auth.service';
 import { BasketService } from 'src/app/services/basket.service';
+import { ErrorService } from 'src/app/services/errorService';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductModel } from './../../models/product';
 
@@ -19,40 +20,63 @@ export class ProductComponent implements OnInit, AfterContentChecked {
   filterText: string = ''
 
   constructor(private productService: ProductService, private basketService: BasketService,
+    private errorService : ErrorService,
     private authService: AuthService, private toastrService: ToastrService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.spinner.show()
-    this.productService.getProducts().subscribe(res => {
-      this.products = res.data
-      this.spinner.hide()
-    }, err => {
-      if (err.status == '404') {
-        this.spinner.hide()
-        this.toastrService.error(err.statusText)
-      } else {
-        this.spinner.hide()
-        console.log(err)
-      }
-    })
+    this.getProducts()
   }
+
+  getProducts() {
+    this.productService.getProducts()
+  }
+
+ 
 
   ngAfterContentChecked(): void {
     this.isAuth = this.authService.isAuthenticated()
+    this.products = this.productService.products
   }
 
   addBasket(product: ProductModel) {
+    this.spinner.show()
     let basket = new BasketModel()
+    basket.productId = product.id
     basket.product = product
-    basket.quantity = parseInt((<HTMLInputElement>document.getElementById('q-' + product.name)).value);
+    basket.quantity = 1
+    this.basketService.addBasket(basket).subscribe(res => {
+      this.spinner.hide()
+      this.getProducts()
+      this.basketService.getBasketList()
+      this.toastrService.success(res.message)
+    }, err => {
+      this.spinner.hide()
+      this.errorService.errorHandler(err)
+    })
+  }
+  
 
-    (<HTMLInputElement>document.getElementById('q-' + product.name)).value = "1"
 
-    this.basketService.addBasket(basket)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  addBasketButtonClass(product: ProductModel) {
+    if (product.inventoryQuantity > 0) return "btn btn-success active"
+    else return "btn btn-success disabled"
   }
 
-
-  sepeteEkleButon() {
-    return "btn btn-success"
-  }
 }

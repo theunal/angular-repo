@@ -3,7 +3,7 @@ import { BasketModel } from 'src/app/models/basket';
 import { AuthService } from 'src/app/services/auth.service';
 import { BasketService } from 'src/app/services/basket.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -30,11 +30,6 @@ export class NavComponent implements OnInit, AfterContentChecked{
       this.loginPage = true
     }
   }
-
-  // login() {
-  //   this.authService.login()
-  //   this.toastrService.success('You are logged in!', 'Success')
-  // }
 
   logout() {
     this.authService.logout()

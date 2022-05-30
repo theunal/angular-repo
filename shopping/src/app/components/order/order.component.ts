@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { OrderModel } from 'src/app/models/order';
-import { BasketService } from 'src/app/services/basket.service';
+import { ErrorService } from 'src/app/services/errorService';
 import { OrderService } from 'src/app/services/order.service';
+import { OrderResponseModel } from './../../models/orderResponseModel';
 
 @Component({
   selector: 'app-order',
@@ -11,18 +11,28 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrderComponent implements OnInit {
 
-  orders : OrderModel[] = []
-  total : number = 0
+  orders: OrderResponseModel[] = []
 
-  
 
-  constructor(private orderService : OrderService, private basketService : BasketService) { }
+
+  constructor(private orderService: OrderService, private spinner : NgxSpinnerService,
+    private errorService : ErrorService) { }
 
   ngOnInit(): void {
-    this.orders = this.orderService.orders
-    this.total = this.basketService.total
-    
-    console.log(this.orders)
+    this.getOrders()
   }
+
+  getOrders() {
+    this.spinner.show()
+    this.orderService.getOrders().subscribe(res => {
+      this.spinner.hide()
+      this.orders = res.data
+      console.log(res)
+    }, err => {
+      this.spinner.hide()
+      this.errorService.errorHandler(err)
+    })
+  }
+
 
 }

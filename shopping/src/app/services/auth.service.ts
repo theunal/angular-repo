@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { LoginModel } from '../models/login';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ResponseModel } from '../models/responseModel';
 import { TokenModel } from '../models/token';
 import { SingleResponseModel } from '../models/singleResponseModel';
 
@@ -14,7 +13,10 @@ export class AuthService {
 
   isAuth : boolean = false
 
-  constructor(private httpClient : HttpClient, private router : Router) { }
+  constructor(
+    @Inject('api')
+    private api: string,
+    private httpClient : HttpClient, private router : Router) { }
 
   isAuthenticated() {
     if (localStorage.getItem('token')) {
@@ -26,17 +28,17 @@ export class AuthService {
   }
 
   login(login : LoginModel) : Observable<SingleResponseModel<TokenModel>>  {
-    let url = 'https://webapi.angulareducation.com/api/users/login'
     this.isAuth = true
+    let url = this.api + 'users/login'
     return this.httpClient.post<SingleResponseModel<TokenModel>>(url,login)
   }
+
+
 
   logout() {
     localStorage.removeItem('token')
     this.isAuth = false
     this.router.navigate(['/'])
   }
-
-
 
 }

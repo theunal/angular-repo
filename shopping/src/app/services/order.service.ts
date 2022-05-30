@@ -1,6 +1,8 @@
-import { Injectable } from "@angular/core"
-import { OrderModel } from './../models/order';
-import { BasketModel } from 'src/app/models/basket';
+import { Inject, Injectable } from "@angular/core"
+import { HttpClient } from "@angular/common/http";
+import { ListResponseModel } from "../models/listResponseModel";
+import { Observable } from 'rxjs';
+import { OrderResponseModel } from "../models/orderResponseModel";
 
 
 @Injectable({
@@ -8,16 +10,14 @@ import { BasketModel } from 'src/app/models/basket';
 })
 export class OrderService {
 
-    orders: OrderModel[] = []
+    constructor(
+        @Inject('api')
+        private api: string,
+        private httpClient: HttpClient) { }
 
-    constructor() { }
-
-    addOrder(baskets : BasketModel[]) {
-        let order = new OrderModel()
-        order.baskets = baskets
-        order.date = new Date()
-        order.orderNumber = Math.floor(Math.random() * 1000000000)
-        this.orders.push(order)
+    getOrders(): Observable<ListResponseModel<OrderResponseModel>> {
+        let url = this.api + 'Orders/getList'
+        return this.httpClient.get<ListResponseModel<OrderResponseModel>>(url)
     }
 
 }

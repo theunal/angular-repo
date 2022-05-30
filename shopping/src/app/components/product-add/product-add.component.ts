@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ProductModel } from 'src/app/models/product';
+import { ErrorService } from 'src/app/services/errorService';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -15,7 +16,10 @@ export class ProductAddComponent implements OnInit {
   addForm : FormGroup
   imageUrl : string = ''
 
-  constructor(private productService : ProductService, private toastrService : ToastrService, 
+  constructor(
+    @Inject('validationError') private validationError : string,
+    private errorService : ErrorService,
+    private productService : ProductService, private toastrService : ToastrService, 
     private spinner : NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -47,11 +51,11 @@ export class ProductAddComponent implements OnInit {
       this.productService.productAdd(product).subscribe(res => {
         this.toastrService.success('Product Added', 'Success')
       }, err => {
-        this.toastrService.warning(err.error.message)
+        this.errorService.errorHandler(err)
       })
     } else {
       this.spinner.hide()
-      this.toastrService.error('Lütfen tüm alanları doldurunuz!')
+      this.toastrService.error(this.validationError)
     }
   }
 

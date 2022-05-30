@@ -1,6 +1,14 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { BasketModel } from '../models/basket';
+import { CustomerModel } from '../models/customer';
+import { ListResponseModel } from '../models/listResponseModel';
+import { PaymentModel } from '../models/payment';
+import { ResponseModel } from '../models/responseModel';
+import { ErrorService } from './errorService';
 import { OrderService } from './order.service';
 
 @Injectable({
@@ -11,18 +19,52 @@ export class BasketService {
   basketList: BasketModel[] = []
   total: number = 0
 
-  constructor(private toastrService : ToastrService, private orderService : OrderService) { }
 
-  
-  addBasket(model : BasketModel) {
+  constructor(
+    @Inject('api')
+    private api: string,
+    private toastrService: ToastrService,
+    private errorService : ErrorService,
+    private httpClient: HttpClient) { }
 
-    if (this.basketList.find(b => b.product == model.product)) {
-      this.basketList.find(b => b.product == model.product).quantity += model.quantity
-    } else {
-      this.basketList.push(model)
-      this.toastrService.success(model.product.name + ' Sepete Eklendi', 'Başarılı')
-    }
+  getBasketList() {
+    let url = this.api + 'baskets/getlist'
+
+    return this.httpClient.get<ListResponseModel<BasketModel>>(url).subscribe(res => {
+      this.basketList = res.data
+    }, err => {
+      console.log(err)
+    })
+  } 
+
+  addBasket(basket : BasketModel) : Observable<ResponseModel>{
+    let url = this.api + 'baskets/add'
+    return this.httpClient.post<ResponseModel>(url, basket)
   }
+
+  deleteBasket(basket : BasketModel) : Observable<ResponseModel>{
+    let url = this.api + 'baskets/delete'
+    return this.httpClient.post<ResponseModel>(url, basket)
+  }
+
+  update(basket : BasketModel) : Observable<ResponseModel>{
+    let url = this.api + 'baskets/update'
+    return this.httpClient.post<ResponseModel>(url, basket)
+  }
+
+
+  payment(payment : PaymentModel) {
+    let url = this.api + 'Orders/addPayment'
+    let customer = new CustomerModel()
+    customer.payment = payment
+    customer.baskets = this.basketList
+    this.httpClient.post(url, customer).subscribe(res => {
+      this.toastrService.success('Ödeme Başarılı')
+    }, err => {
+      this.errorService.errorHandler(err)
+    })
+  }
+
 
   totalPrice() {
     this.total = 0
@@ -32,32 +74,4 @@ export class BasketService {
     return this.total
   }
 
-  delete(basket: BasketModel) {
-    this.basketList.splice(this.basketList.indexOf(basket), 1)
-    this.toastrService.info(basket.product.name + ' sepetten silindi')
-  }
-
-  increase(basket: BasketModel) {
-    basket.quantity++
-  }
-
-  reduce(basket: BasketModel) {
-    if (basket.quantity > 1) {
-      basket.quantity--
-    } else {
-      this.basketList.splice(this.basketList.indexOf(basket), 1)
-    }
-  }
-
-
-  payment(total: number) {
-    if (total == this.total) {
-      this.orderService.addOrder(this.basketList)
-     // this.basketList.splice(0, this.basketList.length)
-      document.getElementById('paymentCloseButton').click();
-      this.toastrService.success('Ödeme Başarılı')
-
-     
-    }
-  }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,7 @@ import { from } from 'rxjs';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoginComponent } from './components/login/login.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,11 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
       timeOut: 3000
     })
   ],
-  providers: [],
+  providers: [
+    {provide: 'api', useValue: 'https://webapi.angulareducation.com/api/' },
+    {provide: 'validationError', useValue: 'Lütfen tüm alanları doldurunuz!' },
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi : true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ProductModel } from 'src/app/models/product';
+import { ErrorService } from 'src/app/services/errorService';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -17,7 +18,10 @@ export class ProductUpdateComponent implements OnInit {
   product: ProductModel = new ProductModel()
   imageUrl : string = ''
 
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService,
+  constructor(
+    @Inject('validationError') private validationError : string,
+    private errorService : ErrorService,
+    private activatedRoute: ActivatedRoute, private productService: ProductService,
     private toastrService: ToastrService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -52,7 +56,7 @@ export class ProductUpdateComponent implements OnInit {
     }, err => {
       this.spinner.hide()
       this.router.navigate(["/"])
-      this.toastrService.info(err.error.Message)
+      this.errorService.errorHandler(err)
     })
   }
 
@@ -67,12 +71,12 @@ export class ProductUpdateComponent implements OnInit {
       this.productService.productUpdate(product).subscribe((res) => {
         this.router.navigate(["/"]);
         this.toastrService.info(res.message, product.name);
-      }, (err) => {
-        this.toastrService.info(err.error.Message)
+      }, err => {
+        this.errorService.errorHandler(err)
       });
     } else {
       this.spinner.hide()
-      this.toastrService.info('Lütfen formu doldurunuz!')
+      this.toastrService.info(this.validationError)
     }
   }
 
@@ -86,7 +90,7 @@ export class ProductUpdateComponent implements OnInit {
       console.log(res)
     }, err => {
       this.spinner.hide()
-      this.toastrService.info(err.error.Message)
+      this.errorService.errorHandler(err)
     })
   }
 }
